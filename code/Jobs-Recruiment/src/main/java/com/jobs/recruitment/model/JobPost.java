@@ -54,8 +54,8 @@ public class JobPost implements Serializable {
 	@Column(name="status")
 	private int status;
 	
-	@Column(name="locationid")
-	private int locationId;
+	@Column(name="location")
+	private String location;
 	
 	@Column(name="infor_contact")
 	private String inforContact;
@@ -75,7 +75,7 @@ public class JobPost implements Serializable {
 
 	public JobPost(Long id, String companyName, String jobName, String jobDes, String jobRe, String emplStatus,
 			String offer, String expLevel, String skill, String refLang, String companySize, int status,
-			int locationId, String inforContact, String date, String email, String image) {
+			String location, String inforContact, String date, String email, String image) {
 		super();
 		this.id = id;
 		this.companyName = companyName;
@@ -89,7 +89,7 @@ public class JobPost implements Serializable {
 		this.refLang = refLang;
 		this.companySize = companySize;
 		this.status = status;
-		this.locationId = locationId;
+		this.location = location;
 		this.inforContact = inforContact;
 		this.date = date;
 		this.email = email;
@@ -192,12 +192,12 @@ public class JobPost implements Serializable {
 		this.status = status;
 	}
 
-	public int getLocationId() {
-		return locationId;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public String getInforContact() {

@@ -141,9 +141,9 @@
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="location">Location</label>
-									<form:select path="locationId" name="location" id="location" class="form-control">
-										<form:option value="Hồ Chí Minh ">Hồ Chí Minh</form:option>
-										<form:option value="Hà Nội">Hà Nội</form:option></form:option>
+									<form:select path="location" name="location" id="location" class="form-control">
+										<form:option value="Hồ Chí Minh">Hồ Chí Minh</form:option>
+										<form:option value="Hà Nội">Hà Nội</form:option>
 										<form:option value="Đà Nẵng">Đà Nẵng</form:option>
 										<form:option value="Huế">Huế</form:option>
 										<form:option value="Cần Thơ">Cần Thơ</form:option>

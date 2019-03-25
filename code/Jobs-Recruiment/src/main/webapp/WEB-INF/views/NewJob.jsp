@@ -142,11 +142,11 @@
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="location">Location</label>
 									<form:select path="locationId" name="location" id="location" class="form-control">
-										<form:option value="1">HCM</form:option>
-										<form:option value="2">HN</form:option>
-										<form:option value="3">DA NANG</form:option>
-										<form:option value="4">HUE</form:option>
-										<form:option value="5">CAN THO</form:option>
+										<form:option value="Hồ Chí Minh ">Hồ Chí Minh</form:option>
+										<form:option value="Hà Nội">Hà Nội</form:option></form:option>
+										<form:option value="Đà Nẵng">Đà Nẵng</form:option>
+										<form:option value="Huế">Huế</form:option>
+										<form:option value="Cần Thơ">Cần Thơ</form:option>
 									</form:select>
 								</div>
 							</div>
@@ -172,8 +172,8 @@
 										Status</label>
 									<form:select path="emplStatus" name="status" id="status"
 										class="form-control">
-										<form:option value="0">Full Time</form:option>
-										<form:option value="1">Part Time</form:option>
+										<form:option value="Full Time">Full Time</form:option>
+										<form:option value="Part Time">Part Time</form:option>
 									</form:select>
 								</div>
 							</div>
@@ -198,11 +198,11 @@
 										Level</label> 
 										<form:select path="expLevel" name="year_exp" id="year_exp"
 										class="form-control">
-										<form:option value="1">0 - 6 months</form:option>
-										<form:option value="2">6 - 1 years</form:option>
-										<form:option value="3">1 - 2 years</form:option>
-										<form:option value="4">2 - 3 years</form:option>
-										<form:option value="5">Over 3 years</form:option>
+										<form:option value="0 - 6 months">0 - 6 months</form:option>
+										<form:option value="6 - 1 years">6 - 1 years</form:option>
+										<form:option value="1 - 2 years">1 - 2 years</form:option>
+										<form:option value="2 - 3 years">2 - 3 years</form:option>
+										<form:option value="Over 3 years">Over 3 years</form:option>
 										
 										</form:select>
 								</div>

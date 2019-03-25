@@ -26,7 +26,6 @@ public class JobDaoImp implements JobDao {
 			jobPost.setStatus(0);
 			session.save(jobPost);
 			// session.getTransaction().commit();
-			System.out.println(jobPost.getJobDes());
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -1,5 +1,8 @@
 package com.jobs.recruitment.dao;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,11 @@ public class JobDaoImp implements JobDao {
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			// session.beginTransaction();
+			jobPost.setDate(this.getNow());
+			jobPost.setStatus(0);
 			session.save(jobPost);
 			// session.getTransaction().commit();
-			System.out.println(jobPost.getId());
+			System.out.println(jobPost.getJobDes());
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -29,5 +34,10 @@ public class JobDaoImp implements JobDao {
 			// TODO: handle exception
 		}
 	}
-
+	private String getNow()
+	{
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+	    Date date = new Date();
+	    return formatter.format(date).toString();
+	}
 }

@@ -116,7 +116,7 @@ public class HomeController {
 		imageNam = imageNam.replace(" " , ""); 
 		jobPost.setImage(imageNam+ ".png");
 		path = Paths
-				.get("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/uploaded-images/" +imageNam+ ".png");
+				.get("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-images/" +imageNam+ ".png");
 		if(file!=null&&!file.isEmpty()) {
 			try {
 				System.out.println("ok");

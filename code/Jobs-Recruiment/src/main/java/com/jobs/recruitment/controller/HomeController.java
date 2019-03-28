@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -46,7 +47,17 @@ public class HomeController {
 	
 	@RequestMapping(value = "/")
 	public String home(Model model) {
-		return "index";
+		return "redirect:/Home";
+	}
+	@RequestMapping(value = "/Home", method = RequestMethod.GET)
+	public String findAll(Model model, Integer offset, Integer maxResults) {
+		List<JobPost> listJobpost = jobService.findAll(offset, maxResults);
+		model.addAttribute("count", jobService.count());
+		model.addAttribute("offset", offset);
+		model.addAttribute("listJobpost", listJobpost);
+		System.out.println(listJobpost.size());
+		System.out.println(listJobpost.get(0).getImage());
+		return "Home";
 	}
 	
 	/*---SHOW LOGIN-------*/
@@ -65,7 +76,7 @@ public class HomeController {
 	@RequestMapping(value = "/Check-Login", method = RequestMethod.POST)
 	public String checkLogin(@Validated @ModelAttribute("login") Login login) {
 		if (userService.checkLogin(login)==1) {
-			return "index";
+			return "Home";
 		}
 		else if(userService.checkLogin(login)==2){
 			return "home";
@@ -101,9 +112,11 @@ public class HomeController {
 		}
 		String fileName = file.getOriginalFilename();
 		System.out.println(fileName);
-		jobPost.setImage(fileName);
+		String imageNam=jobPost.getCompanyName();
+		imageNam = imageNam.replace(" " , ""); 
+		jobPost.setImage(imageNam+ ".png");
 		path = Paths
-				.get("/Users/TuanTran/Desktop/uploaded-images/" +jobPost.getCompanyName()+ ".png");
+				.get("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/uploaded-images/" +imageNam+ ".png");
 		if(file!=null&&!file.isEmpty()) {
 			try {
 				System.out.println("ok");

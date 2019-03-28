@@ -1,25 +1,40 @@
 package com.jobs.recruitment.config;
 
-import static org.hibernate.cfg.Environment.*;
+import static org.hibernate.cfg.AvailableSettings.C3P0_ACQUIRE_INCREMENT;
+import static org.hibernate.cfg.AvailableSettings.C3P0_MAX_SIZE;
+import static org.hibernate.cfg.AvailableSettings.C3P0_MAX_STATEMENTS;
+import static org.hibernate.cfg.AvailableSettings.C3P0_MIN_SIZE;
+import static org.hibernate.cfg.AvailableSettings.C3P0_TIMEOUT;
+import static org.hibernate.cfg.AvailableSettings.DIALECT;
+import static org.hibernate.cfg.AvailableSettings.DRIVER;
+import static org.hibernate.cfg.AvailableSettings.HBM2DDL_AUTO;
+import static org.hibernate.cfg.AvailableSettings.PASS;
+import static org.hibernate.cfg.AvailableSettings.SHOW_SQL;
+import static org.hibernate.cfg.AvailableSettings.URL;
+import static org.hibernate.cfg.AvailableSettings.USER;
 
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
 @ComponentScans(value = { @ComponentScan("com.jobs.recruitment.dao"),
-		@ComponentScan("com.jobs.recruitment.service") })
+		@ComponentScan("com.jobs.recruitment.service"),@ComponentScan("com.jobs.recruitment.validator") })
 public class AppConfig {
 	@Autowired
 	private Environment env;
@@ -64,4 +79,22 @@ public class AppConfig {
 		transactionManager.setSessionFactory(getSessionFactory().getObject());
 		return transactionManager;
 	}
+//	@Bean
+//	  public MultipartResolver multipartResolver(){
+//	      CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+//	      commonsMultipartResolver.setDefaultEncoding("utf-8");
+//	      commonsMultipartResolver.setMaxUploadSize(20000000);
+//	      commonsMultipartResolver.setResolveLazily(false);
+//	      return commonsMultipartResolver;
+//	  }
+	@Bean
+	public MessageSource messageSource() {
+	    ReloadableResourceBundleMessageSource messageSource
+	      = new ReloadableResourceBundleMessageSource();
+	     
+	    messageSource.setBasename("classpath:messages");
+	    messageSource.setDefaultEncoding("UTF-8");
+	    return messageSource;
+	}
+
 }

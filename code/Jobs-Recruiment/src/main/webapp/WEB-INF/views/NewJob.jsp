@@ -110,8 +110,8 @@
 			<div class="container">
 				<div class="col-md-12 col-lg-12 mb-5">
 
-					<form:form action="/SaveJob" class="p-5 bg-white" method="POST"
-						modelAttribute="newJob">
+					<form:form action="SaveJob" class="p-5 bg-white" method="POST"
+						enctype="multipart/form-data" modelAttribute="fileUploadModel">
 						<h2>It’s our pleasure to support you recruiting your next
 							awesome teammate.</h2>
 						<div class="row form-group">
@@ -141,7 +141,8 @@
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="location">Location</label>
-									<form:select path="location" name="location" id="location" class="form-control">
+									<form:select path="location" name="location" id="location"
+										class="form-control">
 										<form:option value="Hồ Chí Minh">Hồ Chí Minh</form:option>
 										<form:option value="Hà Nội">Hà Nội</form:option>
 										<form:option value="Đà Nẵng">Đà Nẵng</form:option>
@@ -195,16 +196,16 @@
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="email">Experience
-										Level</label> 
-										<form:select path="expLevel" name="year_exp" id="year_exp"
+										Level</label>
+									<form:select path="expLevel" name="year_exp" id="year_exp"
 										class="form-control">
 										<form:option value="0 - 6 months">0 - 6 months</form:option>
 										<form:option value="6 - 1 years">6 - 1 years</form:option>
 										<form:option value="1 - 2 years">1 - 2 years</form:option>
 										<form:option value="2 - 3 years">2 - 3 years</form:option>
 										<form:option value="Over 3 years">Over 3 years</form:option>
-										
-										</form:select>
+
+									</form:select>
 								</div>
 							</div>
 						</div>
@@ -213,9 +214,10 @@
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="language">Preferred
-										Language</label> 
-										<form:input path="refLang" type="text" id="language" class="form-control"
-										required="required" placeholder="eg. English"/>
+										Language</label>
+									<form:input path="refLang" type="text" id="language"
+										class="form-control" required="required"
+										placeholder="eg. English" />
 								</div>
 							</div>
 						</div>
@@ -224,9 +226,10 @@
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="size">Company Size</label>
-									
-									<form:input path="companySize" type="text" id="size" class="form-control"
-										required="required" placeholder="eg. 200000 staffs"/>
+
+									<form:input path="companySize" type="text" id="size"
+										class="form-control" required="required"
+										placeholder="eg. 200000 staffs" />
 								</div>
 							</div>
 						</div>
@@ -234,9 +237,20 @@
 						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
-									<label class="font-weight-bold" for="cont">Contact</label> 
-									<form:input path="inforContact" type="text" id="cont" class="form-control" required="required"
-										placeholder="eg. Mr Linh"/>
+									<label class="font-weight-bold" for="cont">Contact</label>
+									<form:input path="inforContact" type="text" id="cont"
+										class="form-control" required="required"
+										placeholder="eg. Mr Linh" />
+								</div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
+								<div style="width: 75%; margin: auto;">
+									<label class="font-weight-bold" for="cont">Address</label>
+									<form:input path="address" type="text" id="cont"
+										class="form-control" required="required"
+										placeholder="eg. 6 Nguyen Thi Thap,Quan 7,TPHCM" />
 								</div>
 							</div>
 						</div>
@@ -246,18 +260,21 @@
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="salary">Offer</label>
-									<form:textarea path="offer" name="" class="form-control" id="offer" cols="15"
-										rows="5" placeholder="eg. 1000$" required="required"/>
+									<form:textarea path="offer" name="" class="form-control"
+										id="offer" cols="15" rows="5" placeholder="eg. 1000$"
+										required="required" />
 								</div>
 							</div>
 						</div>
+						
 
 						<div class="row form-group">
 							<div class="col-md-12">
 								<h3>Job Description</h3>
 							</div>
 							<div class="col-md-12 mb-3 mb-md-0">
-							<form:textarea path="jobDes" name="" class="form-control" id="" cols="30" rows="7" required="required"/>
+								<form:textarea path="jobDes" name="" class="form-control" id=""
+									cols="30" rows="7" required="required" />
 							</div>
 						</div>
 
@@ -266,11 +283,19 @@
 								<h3>Job Requirements</h3>
 							</div>
 							<div class="col-md-12 mb-3 mb-md-0">
-							<form:textarea path="jobRe" name="" class="form-control" id="" cols="30" rows="7"
-									required="required"/>
+								<form:textarea path="jobRe" name="" class="form-control" id=""
+									cols="30" rows="7" required="required" />
 							</div>
 						</div>
-
+						
+						<div class="row form-group">
+							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
+								<div style="width: 75%; margin: auto;">
+									<label class="font-weight-bold" for="jobname">Upload
+										Avatar</label> <input type="file" name="file">
+								</div>
+							</div>
+						</div>
 						<div class="row form-group">
 							<div class="col-md-12">
 								<input type="submit" value="Post"
@@ -278,7 +303,15 @@
 							</div>
 						</div>
 				</div>
-
+				<div class="row form-group">
+					<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
+						<div style="width: 75%; margin: auto;">
+							<label class="font-weight-bold" for="jobname">Upload
+								Avatar</label>
+							<form:errors path="file" style="color:red;" />
+						</div>
+					</div>
+				</div>
 				</form:form>
 			</div>
 		</div>

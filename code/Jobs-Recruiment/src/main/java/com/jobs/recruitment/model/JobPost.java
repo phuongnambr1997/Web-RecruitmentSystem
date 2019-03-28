@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity(name = "job_posts")
 public class JobPost implements Serializable {
@@ -69,32 +72,12 @@ public class JobPost implements Serializable {
 	@Column(name="image")
 	private String image;
 
-	public JobPost() {
-		super();
-	}
-
-	public JobPost(Long id, String companyName, String jobName, String jobDes, String jobRe, String emplStatus,
-			String offer, String expLevel, String skill, String refLang, String companySize, int status,
-			String location, String inforContact, String date, String email, String image) {
-		super();
-		this.id = id;
-		this.companyName = companyName;
-		this.jobName = jobName;
-		this.jobDes = jobDes;
-		this.jobRe = jobRe;
-		this.emplStatus = emplStatus;
-		this.offer = offer;
-		this.expLevel = expLevel;
-		this.skill = skill;
-		this.refLang = refLang;
-		this.companySize = companySize;
-		this.status = status;
-		this.location = location;
-		this.inforContact = inforContact;
-		this.date = date;
-		this.email = email;
-		this.image = image;
-	}
+	@Column(name="address")
+	private String address;
+	
+	@Transient
+	private MultipartFile file;
+	
 
 	public Long getId() {
 		return id;
@@ -230,6 +213,22 @@ public class JobPost implements Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

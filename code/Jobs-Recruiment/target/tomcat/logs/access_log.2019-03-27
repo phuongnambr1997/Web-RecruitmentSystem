@@ -1,0 +1,7 @@
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:08:56 +0700] "GET / HTTP/1.1" 200 16429 http-bio-8800-exec-1 506
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:08:56 +0700] "GET /resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&libraries=places&callback=initAutocomplete HTTP/1.1" 404 949 http-bio-8800-exec-3 8
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:08:56 +0700] "GET /resources/https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&libraries=places&callback=initAutocomplete HTTP/1.1" 404 949 http-bio-8800-exec-4 4
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:08:59 +0700] "GET /NewJob HTTP/1.1" 200 11271 http-bio-8800-exec-5 1502
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:08:59 +0700] "GET /fonts/icomoon/style.css HTTP/1.1" 404 949 http-bio-8800-exec-6 2
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:09:16 +0700] "POST /SaveJob HTTP/1.1" 500 17008 http-bio-8800-exec-7 384
+0:0:0:0:0:0:0:1 - - [27/Mar/2019:01:10:12 +0700] "POST /SaveJob HTTP/1.1" 200 134 http-bio-8800-exec-9 70

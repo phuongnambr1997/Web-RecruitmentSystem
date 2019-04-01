@@ -55,4 +55,16 @@ public class JobDaoImp implements JobDao {
 		return (Long) sessionFactory.openSession().createCriteria(JobPost.class).setProjection(Projections.rowCount())
 				.uniqueResult();
 	}
+	@Override
+	public JobPost getJobPost(Long id) {
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			JobPost model = session.byId(JobPost.class).load(id);
+			return model;
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		return null;
+	}
 }

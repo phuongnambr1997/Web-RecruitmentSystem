@@ -34,4 +34,10 @@ public class JobServiceImp implements JobService {
 		return jobDao.count();
 	}
 
+	@Override
+	public JobPost getJobPost(Long id) {
+		// TODO Auto-generated method stub
+		return jobDao.getJobPost(id);
+	}
+
 }

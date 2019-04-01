@@ -12,4 +12,6 @@ public interface JobDao {
 
 	public abstract Long count();
 
+	public abstract JobPost getJobPost(Long id);
+
 }

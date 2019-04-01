@@ -8,7 +8,9 @@ public interface JobService {
 	public abstract boolean newJob(JobPost jobPost);
 
 	public abstract List<JobPost> findAll(Integer offset, Integer maxResult);
-	
+
 	public abstract Long count();
+
+	public abstract JobPost getJobPost(Long id);
 
 }

@@ -82,7 +82,7 @@
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
 								<li><a href="contact.html">Contact</a></li>
-								<li><a href="/NewJob"><span
+								<li><a href="/NewJob" id="newJob"><span
 										class="rounded bg-primary py-2 px-3 text-white"><span
 											class="h5 mr-2">+</span> Post a Job</span></a></li>
 								<li><a href="/Login">Login</a></li>
@@ -209,24 +209,26 @@
 					<div class="col-md-9" data-aos="fade">
 						<h2 class="font-weight-bold text-black">Recent Jobs</h2>
 					</div>
-					<div class="col-md-3" data-aos="fade" data-aos-delay="200">
+					<!-- <div class="col-md-3" data-aos="fade" data-aos-delay="200">
 						<a href="#" class="btn btn-primary py-3 btn-block"><span
 							class="h5">+</span> Post a Job</a>
-					</div>
+					</div> -->
 				</div>
 					<c:forEach var="listJobpost" items="${listJobpost}">
+					
 							<div class="row" data-aos="fade">
 								<div class="col-md-12">
 
 									<div
 										class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
+										<a href="/Get-JobPost/${listJobpost.id}">
 										<div class="mb-4 mb-md-0 mr-5">
 											<div class="job-post-item-header d-flex align-items-center">
 												<img class="img-responsive" alt="" src="<c:url value="/resources/uploaded-images/${listJobpost.image}"></c:url>">
 												<h2 class="mr-3 text-black h4" style="margin-left: 1em">${listJobpost.jobName}</h2>
 
 											</div>
+											</a>
 											<div class="job-post-item-body d-block d-md-flex">
 												<div class="mr-3">
 													<span class="fl-bigmug-line-portfolio23"></span>

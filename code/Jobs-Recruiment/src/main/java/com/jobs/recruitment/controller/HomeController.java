@@ -16,10 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jobs.recruitment.function.StringUtils;
 import com.jobs.recruitment.model.JobPost;
 import com.jobs.recruitment.model.Login;
 import com.jobs.recruitment.model.SignUp;
@@ -55,8 +57,6 @@ public class HomeController {
 		model.addAttribute("count", jobService.count());
 		model.addAttribute("offset", offset);
 		model.addAttribute("listJobpost", listJobpost);
-		System.out.println(listJobpost.size());
-		System.out.println(listJobpost.get(0).getImage());
 		return "Home";
 	}
 	
@@ -111,15 +111,13 @@ public class HomeController {
 			return "/NewJob";
 		}
 		String fileName = file.getOriginalFilename();
-		System.out.println(fileName);
 		String imageNam=jobPost.getCompanyName();
 		imageNam = imageNam.replace(" " , ""); 
-		jobPost.setImage(imageNam+ ".png");
+		jobPost.setImage(StringUtils.removeAccent(imageNam)+ ".png");
 		path = Paths
-				.get("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-images/" +imageNam+ ".png");
+				.get("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-images/" +StringUtils.removeAccent(imageNam)+ ".png");
 		if(file!=null&&!file.isEmpty()) {
 			try {
-				System.out.println("ok");
 				file.transferTo(new File(path.toString()));
 				this.jobService.newJob(jobPost);
 			} catch (IllegalStateException e) {
@@ -132,5 +130,12 @@ public class HomeController {
 
 		}
 		return "redirect:/?success=1";
+	}
+	/*---GET DEVICE BY ID---------*/
+	@RequestMapping(value = "/Get-JobPost/{id}")
+	public String getDevice(@PathVariable Long id, Model model) {
+		JobPost jobPost = this.jobService.getJobPost(id);
+		model.addAttribute("jobPost", jobPost);
+		return "Job-single";
 	}
 }

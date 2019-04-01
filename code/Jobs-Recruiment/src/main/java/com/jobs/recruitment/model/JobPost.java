@@ -75,6 +75,9 @@ public class JobPost implements Serializable {
 	@Column(name="address")
 	private String address;
 	
+	@Column(name="username")
+	private String userName;
+	
 	@Transient
 	private MultipartFile file;
 	
@@ -229,6 +232,14 @@ public class JobPost implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	

@@ -110,10 +110,18 @@
 			<div class="container">
 				<div class="col-md-12 col-lg-12 mb-5">
 
-					<form:form action="SaveJob" class="p-5 bg-white" method="POST"
+					<form:form action="/SaveJob" class="p-5 bg-white" method="POST"
 						enctype="multipart/form-data" modelAttribute="fileUploadModel">
 						<h2>It’s our pleasure to support you recruiting your next
 							awesome teammate.</h2>
+						<div class="row form-group">
+							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
+								<div style="width: 75%; margin: auto;">
+									<form:input path="userName" type="hidden" id="userName"
+										class="form-control" value="${userName}" />
+								</div>
+							</div>
+						</div>
 						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
@@ -266,7 +274,7 @@
 								</div>
 							</div>
 						</div>
-						
+
 
 						<div class="row form-group">
 							<div class="col-md-12">
@@ -287,7 +295,7 @@
 									cols="30" rows="7" required="required" />
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">

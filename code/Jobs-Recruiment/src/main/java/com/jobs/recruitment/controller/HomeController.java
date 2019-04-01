@@ -74,12 +74,18 @@ public class HomeController {
 	}
 	/*----CHECK LOGIN TRUE OR FASLE*/
 	@RequestMapping(value = "/Check-Login", method = RequestMethod.POST)
-	public String checkLogin(@Validated @ModelAttribute("login") Login login) {
+	public String checkLogin(@Validated @ModelAttribute("login") Login login,Model model,Integer offset, Integer maxResults) {
 		if (userService.checkLogin(login)==1) {
-			return "Home";
+			model.addAttribute("username", login.getUserName());
+			model.addAttribute("roleId",1);
+			List<JobPost> listJobpost = jobService.searchAllJobpostByUserName(login.getUserName());
+			model.addAttribute("listJobpost", listJobpost);
+			return "Recruiter";
 		}
 		else if(userService.checkLogin(login)==2){
-			return "home";
+			model.addAttribute("username", login.getUserName());
+			model.addAttribute("roleId",2);
+			return "Home";
 		}
 		return "redirect:/Login";
 	}
@@ -87,23 +93,24 @@ public class HomeController {
 	@RequestMapping(value = "/Registration",method=RequestMethod.POST)
 	public String registration(@Validated @ModelAttribute("registration") SignUp signUp) {
 		if(this.userService.signUp(signUp)==true) {
-			return "home";
+			return "Home";
 		}
 		else {
 			return "redirect:/";
 		}
 	}
 	/*SHOW NEW JOB FORM*/
-	@RequestMapping(value = "/NewJob",method = RequestMethod.GET)
-	public String newJob(Model model) {
+	@RequestMapping(value = "/NewJob/{username}",method = RequestMethod.GET)
+	public String newJob(Model model,@PathVariable String username) {
 		model.addAttribute("fileUploadModel", new JobPost());
+		model.addAttribute("userName", username);
 		return "NewJob";
 
 	}
 	
 	/*SAVE NEW JOB*/
 	@RequestMapping(value="/SaveJob",method=RequestMethod.POST)
-	public String saveJob(Model model,@ModelAttribute JobPost jobPost, BindingResult bindingResult) {
+	public String saveJob(Model model,@ModelAttribute JobPost jobPost, BindingResult bindingResult,Integer offset, Integer maxResults) {
 		MultipartFile file=jobPost.getFile();
 //		customFileValidator.validate(file, bindingResult);
 		System.out.println(file);
@@ -120,6 +127,10 @@ public class HomeController {
 			try {
 				file.transferTo(new File(path.toString()));
 				this.jobService.newJob(jobPost);
+				model.addAttribute("username", jobPost.getUserName());
+				model.addAttribute("roleId",1);
+				List<JobPost> listJobpost = jobService.searchAllJobpostByUserName(jobPost.getUserName());
+				model.addAttribute("listJobpost", listJobpost);
 			} catch (IllegalStateException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -129,7 +140,7 @@ public class HomeController {
 			}
 
 		}
-		return "redirect:/?success=1";
+		return "Recruiter";
 	}
 	/*---GET DEVICE BY ID---------*/
 	@RequestMapping(value = "/Get-JobPost/{id}")
@@ -137,5 +148,12 @@ public class HomeController {
 		JobPost jobPost = this.jobService.getJobPost(id);
 		model.addAttribute("jobPost", jobPost);
 		return "Job-single";
+	}
+	/*---GET DEVICE BY ID IN VIEW RECRUITER---------*/
+	@RequestMapping(value = "/Get-JobPost-Recruiter/{id}")
+	public String getJobpost(@PathVariable Long id, Model model) {
+		JobPost jobPost = this.jobService.getJobPost(id);
+		model.addAttribute("jobPost", jobPost);
+		return "JobSingleRecruiter";
 	}
 }

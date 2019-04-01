@@ -82,11 +82,11 @@
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
 								<li><a href="contact.html">Contact</a></li>
-								<li><a href="/Login" id="newJob" ><span
+								<li><a href="/NewJob/${username}" id="newJob" ><span
 										class="rounded bg-primary py-2 px-3 text-white"><span
 											class="h5 mr-2">+</span> Post a Job</span></a></li>
-								<li><a href="/Login" id="logIn">Login</a></li>
-								<li><a href="/SignUp" id='signUp'> Sign Up</a></li>
+								<li><h5 id="logIn">${username}</h5></li>
+								<li><a href="/Home" id='signUp'> Sign Out</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -220,7 +220,7 @@
 
 									<div
 										class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-										<a href="/Get-JobPost/${listJobpost.id}">
+										<a href="/Get-JobPost-Recruiter/${listJobpost.id}">
 										<div class="mb-4 mb-md-0 mr-5">
 											<div class="job-post-item-header d-flex align-items-center">
 												<img class="img-responsive" alt="" src="<c:url value="/resources/uploaded-images/${listJobpost.image}"></c:url>">
@@ -245,23 +245,32 @@
 											</div>
 										</div>
 
-										<div class="ml-auto" id="applyJob">
+										<!-- <div class="ml-auto" id="applyJob">
 											<a href="job-single.html" class="btn btn-primary py-2" >Apply
 												Job</a>
-										</div>
+										</div> -->
 									</div>
 
 								</div>
 							</div>
 					</c:forEach>
-				<div class="row mt-5" id="taglib">
+				<%-- <div class="row mt-5" id="taglib">
 					<div class="col-md-12 text-center">
 						<div id="page-id" class="site-block-27">
 							<tag:paginate max="10" offset="${offset}" count="${count}"
 								uri="${tab}" next="&raquo;" previous="&laquo;" />
+							<!-- ul>
+								<li><a href="#"><i class="icon-keyboard_arrow_left h5"></i></a></li>
+								<li class="active"><span>1</span></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#"><i class="icon-keyboard_arrow_right h5"></i></a></li>
+							</ul> -->
 						</div>
 					</div>
-				</div>
+				</div> --%>
 
 
 			</div>
@@ -387,7 +396,7 @@
 			}
 		}
 			
-		
+		}
 	</script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 

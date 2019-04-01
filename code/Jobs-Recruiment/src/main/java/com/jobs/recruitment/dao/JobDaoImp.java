@@ -1,6 +1,7 @@
 package com.jobs.recruitment.dao;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,5 +67,19 @@ public class JobDaoImp implements JobDao {
 			// TODO: handle exception
 		}
 		return null;
+	}
+	@Override
+	public List<JobPost> searchAllJobpostByUserName(String username) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<JobPost> jobPostsList = session.createQuery("from job_posts").list();
+		List<JobPost> jobPostsListByUser=new ArrayList<>();
+		for(JobPost jobPost:jobPostsList) 
+		{
+			if(jobPost.getUserName().equals(username)) 
+			{
+				jobPostsListByUser.add(jobPost);
+			}
+		}
+		return jobPostsListByUser;
 	}
 }

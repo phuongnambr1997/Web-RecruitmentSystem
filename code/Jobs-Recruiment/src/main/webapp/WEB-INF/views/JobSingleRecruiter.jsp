@@ -143,9 +143,9 @@
 												</h5></li>
 										</ul>
 									</div>
-									<div class="job-btn align-self-center">
-										<a href="#" class="forth-btn">Apply Job</a>
-									</div>
+									<!-- <div class="job-btn align-self-center">
+										<a href="#" class="forth-btn">Save</a>
+									</div> -->
 								</div>
 							</div>
 							<div class="single-content2 py-4">

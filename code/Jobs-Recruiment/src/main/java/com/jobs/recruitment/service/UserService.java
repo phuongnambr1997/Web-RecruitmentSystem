@@ -7,4 +7,5 @@ public interface UserService {
 	
 	boolean signUp(SignUp signUp);
 	int checkLogin(Login login);
+	
 }

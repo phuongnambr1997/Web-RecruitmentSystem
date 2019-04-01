@@ -40,4 +40,10 @@ public class JobServiceImp implements JobService {
 		return jobDao.getJobPost(id);
 	}
 
+	@Override
+	public List<JobPost> searchAllJobpostByUserName(String username) {
+		// TODO Auto-generated method stub
+		return jobDao.searchAllJobpostByUserName(username);
+	}
+
 }

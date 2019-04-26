@@ -2,10 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Jobstart &mdash; Colorlib Website Template</title>
+<title>Jobstart</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,9 +87,6 @@
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
 								<li><a href="contact.html">Contact</a></li>
-								<!-- <li><a href="new-post.html"><span
-										class="rounded bg-primary py-2 px-3 text-white"><span
-											class="h5 mr-2">+</span> Post a Job</span></a></li> -->
 							</ul>
 						</nav>
 					</div>
@@ -132,8 +131,6 @@
 									<div class="job-text">
 										<h4>${jobPost.jobName}</h4>
 										<ul class="mt-4">
-											<!--                                       <li class="mb-3"><h5><span class="fl-bigmug-line-portfolio23"></span> </h5></li>
- -->
 											<li class="mb-3"><span class="fl-bigmug-line-big104"></span>
 												${jobPost.companyName}
 												</h5></li>
@@ -144,7 +141,84 @@
 										</ul>
 									</div>
 									<div class="job-btn align-self-center">
-										<a href="#" class="forth-btn">Apply Job</a>
+										<button type="button" class="btn btn-primary"
+											data-toggle="modal" data-target="#myModal" class="forth-btn">Apply
+											Job</button>
+										<form:form method="post" action="/ApplyJob" modelAttribute="jobseekerHis" enctype="multipart/form-data">
+											<form:hidden path="postId" value="${jobPost.id}"/>
+											<form:hidden path="recruiter" value="${jobPost.userName}"/>
+											<div class="modal" id="myModal">
+												<div class="modal-dialog">
+													<div class="modal-content">
+
+														<!-- Modal Header -->
+														<div class="modal-header">
+															<h5 class="modal-title" id="myModalLabel">
+																Bạn đang ứng tuyển cho vị trí <strong>${jobPost.jobName}</strong><br>
+																<em class="small" id="appPreferLanguage" style="">Nhà
+																	tuyển dụng ưu tiên hồ sơ ứng tuyển viết bằng <strong
+																	id="appPreferLanguageName">Tiếng Anh</strong>.
+																</em>
+															</h5>
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+														</div>
+
+														<!-- Modal body -->
+														<div class="modal-body">
+															<div class="col-md-12 mb-3 mb-md-0 style=" text-align:center;>
+																<div style="width: 70%; margin: auto;">
+																	<label class="font-weight-bold" for="phone">Email</label>
+																	<form:input path="email" class="input100" type="text"
+																		name="email" placeholder="Email addess..."
+																		required="required" />
+																</div>
+															</div>
+															<div class="form-group awe-check select-resume">
+																<div>
+																	<div id="applyResume" class="m-t-xs"></div>
+
+																	<input type="hidden" name="onlineResumeId"
+																		id="appDefaultResume" value="newAttachment"> <input
+																		type="hidden" name="attachmentResume"
+																		id="attachmentResume" value="">
+
+																	<!-- Upload New CV -->
+																	<div
+																		class="row select-resume__item select-resume__upload-cv m-t-xs">
+																		<div style="width: 50%; margin: auto;">
+																			<div class="radio radio-success">
+																				<label class="font-weight-bold" for="resume">Choose
+																					new Resume(.pdf) </label> <input type="file" name="file" required="required">
+																			</div>
+																		</div>
+																	</div>
+
+																	<br>
+
+
+																</div>
+															</div>
+														</div>
+
+														<!-- Modal footer -->
+														<div class="modal-footer">
+															<input type="hidden" name="appliedType" id="appliedType"
+																value="Post">
+															<div class="pull-right">
+																<button type="button"
+																	class="btn btn-defautl btn-outline track-event"
+																	data-evt-type="cancel-apply" tabindex="11"
+																	data-dismiss="modal">Return</button>
+																<input type="submit" value="Apply"
+																	class="btn btn-primary  py-2 px-5">
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</form:form>
+
 									</div>
 								</div>
 							</div>

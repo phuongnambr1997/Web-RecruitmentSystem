@@ -2,6 +2,7 @@ package com.jobs.recruitment.dao;
 
 import java.util.List;
 
+import com.jobs.recruitment.model.InfoSearch;
 import com.jobs.recruitment.model.JobPost;
 
 public interface JobDao {
@@ -14,6 +15,10 @@ public interface JobDao {
 
 	public abstract JobPost getJobPost(Long id);
 
-	public abstract List<JobPost> searchAllJobpostByUserName(String username);
+	public abstract List<JobPost> searchAllJobpostByUserName(String userName,Integer offset, Integer maxResult);
+
+	public abstract int count(String userName);
+
+	public abstract List<JobPost> searchAllJobpostByType(InfoSearch inforSeach);
 
 }

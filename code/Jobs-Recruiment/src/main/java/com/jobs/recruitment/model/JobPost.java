@@ -23,64 +23,66 @@ public class JobPost implements Serializable {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@Column(name="company_name")
+
+	@Column(name = "company_name")
 	private String companyName;
+
+	@Column(name = "career")
+	private String career;
 	
-	@Column(name="job_name")
+	@Column(name = "job_name")
 	private String jobName;
-	
-	@Column(name="job_description")
+
+	@Column(name = "job_description")
 	private String jobDes;
-	
-	@Column(name="job_recruitment")
+
+	@Column(name = "job_recruitment")
 	private String jobRe;
-	
-	@Column(name="employment_status")
+
+	@Column(name = "employment_status")
 	private String emplStatus;
-	
-	@Column(name="offer")
+
+	@Column(name = "offer")
 	private String offer;
-	
-	@Column(name="experience_level")
+
+	@Column(name = "experience_level")
 	private String expLevel;
-	
-	@Column(name="skill")
+
+	@Column(name = "skill")
 	private String skill;
-	
-	@Column(name="referred_language")
+
+	@Column(name = "referred_language")
 	private String refLang;
-	
-	@Column(name="company_size")
+
+	@Column(name = "company_size")
 	private String companySize;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	private int status;
-	
-	@Column(name="location")
+
+	@Column(name = "location")
 	private String location;
-	
-	@Column(name="infor_contact")
+
+	@Column(name = "infor_contact")
 	private String inforContact;
-	
-	@Column(name="date")
+
+	@Column(name = "date")
 	private String date;
-	
-	@Column(name="email")
-	private String email;
-	
-	@Column(name="image")
+
+	@Column(name = "admin")
+	private String admin;
+
+	@Column(name = "image")
 	private String image;
 
-	@Column(name="address")
+	@Column(name = "address")
 	private String address;
-	
-	@Column(name="username")
+
+	@Column(name = "username")
 	private String userName;
-	
+
 	@Transient
 	private MultipartFile file;
-	
 
 	public Long getId() {
 		return id;
@@ -202,12 +204,12 @@ public class JobPost implements Serializable {
 		this.date = date;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getAdmin() {
+		return admin;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setAdmin(String admin) {
+		this.admin = admin;
 	}
 
 	public String getImage() {
@@ -241,6 +243,16 @@ public class JobPost implements Serializable {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
+	public String getCareer() {
+		return career;
+	}
+
+	public void setCareer(String career) {
+		this.career = career;
+	}
+
 	
+
 	
 }

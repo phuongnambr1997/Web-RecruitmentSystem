@@ -71,7 +71,7 @@
 						<nav class="site-navigation text-right" role="navigation">
 
 							<ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-								<li class="active"><a href="#">Home</a></li>
+								<li class="active"><a href="/ShowViewRecruiter/${passCodeUser}">Home</a></li>
 								<li class="has-children"><a href="category.html">Category</a>
 									<ul class="dropdown">
 										<li><a href="#">Full Time</a></li>
@@ -82,10 +82,13 @@
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
 								<li><a href="contact.html">Contact</a></li>
-								<li><a href="/NewJob/${username}" id="newJob" ><span
+								<li><a href="/NewJob/${username}" id="newJob"><span
 										class="rounded bg-primary py-2 px-3 text-white"><span
 											class="h5 mr-2">+</span> Post a Job</span></a></li>
-								<li><h5 id="logIn">${username}</h5></li>
+								<li class="has-children"><a href="/showProfile/${passCodeUser}">${username}</a>
+									<ul class="dropdown">
+										<li><a href="/getListCv/${passCodeUser}">JobSeeker Apply</a></li>
+									</ul></li>
 								<li><a href="/Home" id='signUp'> Sign Out</a></li>
 							</ul>
 						</nav>
@@ -105,216 +108,102 @@
 			</div>
 
 		</header>
-		<div class="site-blocks-cover"
-			style="background-image: url(/resources/images/hero_1.jpg);"
-			data-aos="fade" data-stellar-background-ratio="0.5">
-			<div class="container">
-				<div class="row row-custom align-items-center">
-					<div class="col-md-10">
-						<h1 class="mb-2 text-black w-75">
-							<span class="font-weight-bold">Find </span>Your Job on Website
-						</h1>
-						<div class="job-search">
-							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-								<li class="nav-item"><a class="nav-link active py-3"
-									id="pills-job-tab" data-toggle="pill" href="#pills-job"
-									role="tab" aria-controls="pills-job" aria-selected="true">Find
-										A Job</a></li>
-							</ul>
-							<div class="tab-content bg-white p-4 rounded"
-								id="pills-tabContent">
-								<div class="tab-pane fade show active" id="pills-job"
-									role="tabpanel" aria-labelledby="pills-job-tab">
-									<form action="#" method="post">
-										<div class="row">
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<input type="text" class="form-control"
-													placeholder="eg. Web Developer">
-											</div>
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<div class="select-wrap">
-													<span class="icon-keyboard_arrow_down arrow-down"></span> <select
-														name="" id="" class="form-control">
-														<option value="1">All Jobs</option>
-														<option value="2">Electronic</option>
-														<option value="3">Information Technology</option>
-														<option value="4">Accountant</option>
-														<option value="5">Office Job</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<div class="select-wrap">
-													<span class="icon-keyboard_arrow_down arrow-down"></span> <select
-														name="" id="" class="form-control">
-														<option value="1">All Locations</option>
-														<option value="2">Ho Chi Minh</option>
-														<option value="3">Da Nang</option>
-														<option value="4">Ha Noi</option>
-														<option value="5">Vung Tau</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<input type="submit" class="btn btn-primary btn-block"
-													value="Search">
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="tab-pane fade" id="pills-candidate" role="tabpanel"
-									aria-labelledby="pills-candidate-tab">
-									<form action="#" method="post">
-										<div class="row">
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<input type="text" class="form-control"
-													placeholder="eg. Carl Smith">
-											</div>
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<div class="select-wrap">
-													<span class="icon-keyboard_arrow_down arrow-down"></span> <select
-														name="" id="" class="form-control">
-														<option value="">Category</option>
-														<option value="fulltime">Full Time</option>
-														<option value="fulltime">Part Time</option>
-														<option value="freelance">Freelance</option>
-														<option value="internship">Internship</option>
-													</select>
-												</div>
-											</div>
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<input type="text"
-													class="form-control form-control-block search-input"
-													id="autocomplete" placeholder="Location"
-													onFocus="geolocate()">
-											</div>
-											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<input type="submit" class="btn btn-primary btn-block"
-													value="Search">
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
 		<div class="site-section bg-light">
 			<div class="container">
-				<div class="row justify-content-start text-left mb-5">
-					<div class="col-md-9" data-aos="fade">
-						<h2 class="font-weight-bold text-black">Recent Jobs</h2>
-					</div>
-					<!-- <div class="col-md-3" data-aos="fade" data-aos-delay="200">
-						<a href="#" class="btn btn-primary py-3 btn-block"><span
-							class="h5">+</span> Post a Job</a>
-					</div> -->
-				</div>
-					<c:forEach var="listJobpost" items="${listJobpost}">
-					
-							<div class="row" data-aos="fade">
-								<div class="col-md-12">
+				<c:forEach var="listJobpost" items="${listJobpost}">
 
-									<div
-										class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-										<a href="/Get-JobPost-Recruiter/${listJobpost.id}">
-										<div class="mb-4 mb-md-0 mr-5">
-											<div class="job-post-item-header d-flex align-items-center">
-												<img class="img-responsive" alt="" src="<c:url value="/resources/uploaded-images/${listJobpost.image}"></c:url>">
-												<h2 class="mr-3 text-black h4" style="margin-left: 1em">${listJobpost.jobName}</h2>
+					<div class="row" data-aos="fade">
+						<div class="col-md-12">
 
-											</div>
-											</a>
-											<div class="job-post-item-body d-block d-md-flex">
-												<div class="mr-3">
-													<span class="fl-bigmug-line-portfolio23"></span>
-													${listJobpost.companyName}
-												</div>
-												<div>
-													<span class="fl-bigmug-line-big104"></span>
-													${listJobpost.location}
-												</div>
+							<div
+								class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
+								<a href="/Get-JobPost-Recruiter/${listJobpost.id}">
+									<div class="mb-4 mb-md-0 mr-5">
+										<div class="job-post-item-header d-flex align-items-center">
+											<img class="img-responsive"  alt=""
+												src="<c:url value="/resources/uploaded-images/${listJobpost.image}"></c:url>">
+											<h2 class="mr-3 text-black h4" style="margin-left: 1em">${listJobpost.jobName}</h2>
 
-												<div>
-													&nbsp; <span class="fl-bigmug-line-nine16"></span></a>
-													${listJobpost.date}
-												</div>
-											</div>
 										</div>
+								</a>
+								<div class="job-post-item-body d-block d-md-flex">
+									<div class="mr-3">
+										<span class="fl-bigmug-line-portfolio23"></span>
+										${listJobpost.companyName}
+									</div>
+									<div>
+										<span class="fl-bigmug-line-big104"></span>
+										${listJobpost.location}
+									</div>
 
-										<!-- <div class="ml-auto" id="applyJob">
+									<div>
+										&nbsp; <span class="fl-bigmug-line-nine16"></span></a>
+										${listJobpost.date}
+									</div>
+								</div>
+							</div>
+
+							<!-- <div class="ml-auto" id="applyJob">
 											<a href="job-single.html" class="btn btn-primary py-2" >Apply
 												Job</a>
 										</div> -->
-									</div>
+						</div>
 
-								</div>
-							</div>
-					</c:forEach>
-				<%-- <div class="row mt-5" id="taglib">
+					</div>
+			</div>
+			</c:forEach>
+			 <div class="row mt-5" id="taglib">
 					<div class="col-md-12 text-center">
 						<div id="page-id" class="site-block-27">
 							<tag:paginate max="10" offset="${offset}" count="${count}"
 								uri="${tab}" next="&raquo;" previous="&laquo;" />
-							<!-- ul>
-								<li><a href="#"><i class="icon-keyboard_arrow_left h5"></i></a></li>
-								<li class="active"><span>1</span></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#"><i class="icon-keyboard_arrow_right h5"></i></a></li>
-							</ul> -->
 						</div>
 					</div>
-				</div> --%>
+				</div> 
 
 
-			</div>
 		</div>
-
-		<div class="py-5 bg-primary">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h2 class="text-white h4 font-weihgt-normal mb-4">Subscribe
-							Newsletter</h2>
-					</div>
-				</div>
-				<form action="" class="row">
-					<div class="col-md-9">
-						<input type="text" class="form-control border-0 mb-3 mb-md-0"
-							placeholder="Enter Your Email">
-					</div>
-					<div class="col-md-3">
-						<input type="submit" value="Send" class="btn btn-dark btn-block"
-							style="height: 45px;">
-					</div>
-				</form>
-			</div>
-		</div>
-		<footer class="site-footer">
-			<div class="container">
-
-
-
-				<div class="col-lg-3">
-					<h3 class="footer-heading mb-4">Contact Info</h3>
-					<ul class="list-unstyled">
-						<li><span class="d-block text-white">Address</span> Ton Duc
-							Thang University Nguyen Huu Tho Street, Ho Chi Minh City</li>
-						<li><span class="d-block text-white">Telephone</span>
-							+84386459031</li>
-						<li><span class="d-block text-white">Email</span>
-							phuongnambr1997@gmail.com</li>
-					</ul>
-
-				</div>
-			</div>
 	</div>
+
+	<div class="py-5 bg-primary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-white h4 font-weihgt-normal mb-4">Subscribe
+						Newsletter</h2>
+				</div>
+			</div>
+			<form action="" class="row">
+				<div class="col-md-9">
+					<input type="text" class="form-control border-0 mb-3 mb-md-0"
+						placeholder="Enter Your Email">
+				</div>
+				<div class="col-md-3">
+					<input type="submit" value="Send" class="btn btn-dark btn-block"
+						style="height: 45px;">
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<div class="container">
+
+
+
+			<div class="col-lg-3">
+				<h3 class="footer-heading mb-4">Contact Info</h3>
+				<ul class="list-unstyled">
+					<li><span class="d-block text-white">Address</span> Ton Duc
+						Thang University Nguyen Huu Tho Street, Ho Chi Minh City</li>
+					<li><span class="d-block text-white">Telephone</span>
+						+84386459031</li>
+					<li><span class="d-block text-white">Email</span>
+						phuongnambr1997@gmail.com</li>
+				</ul>
+
+			</div>
+		</div>
+		</div>
 	</footer>
 	</div>
 
@@ -394,9 +283,7 @@
 					autocomplete.setBounds(circle.getBounds());
 				});
 			}
-		}
-			
-		}
+		}}
 	</script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 

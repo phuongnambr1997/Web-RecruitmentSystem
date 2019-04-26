@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +83,7 @@
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
 								<li><a href="contact.html">Contact</a></li>
-								<li><a href="/Login" id="newJob" ><span
+								<li><a href="/Login" id="newJob"><span
 										class="rounded bg-primary py-2 px-3 text-white"><span
 											class="h5 mr-2">+</span> Post a Job</span></a></li>
 								<li><a href="/Login" id="logIn">Login</a></li>
@@ -125,34 +126,79 @@
 								id="pills-tabContent">
 								<div class="tab-pane fade show active" id="pills-job"
 									role="tabpanel" aria-labelledby="pills-job-tab">
-									<form action="#" method="post">
+									
+									<form:form action="/Search" method="post" modelAttribute="inforSearch">
 										<div class="row">
 											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
-												<input type="text" class="form-control"
-													placeholder="eg. Web Developer">
+											<form:input path="nameJob" type="text" class="form-control"
+													placeholder="eg. Web Developer"/>
 											</div>
 											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
 												<div class="select-wrap">
-													<span class="icon-keyboard_arrow_down arrow-down"></span> <select
-														name="" id="" class="form-control">
-														<option value="1">All Jobs</option>
-														<option value="2">Electronic</option>
-														<option value="3">Information Technology</option>
-														<option value="4">Accountant</option>
-														<option value="5">Office Job</option>
-													</select>
+													<span class="icon-keyboard_arrow_down arrow-down"></span> 
+													<form:select path="typeJob" name="typeJob" id="typeJob" class="form-control">
+														<form:option value="">All Jobs</</form:option>
+														<form:option value="Accounting">Accounting</form:option>
+														<form:option value="Administration & Office Support">Administration
+															& Office Support</form:option>
+														<form:option value="Agriculture, Animals & Conservation">Agriculture,
+															Animals & Conservation</form:option>
+														<form:option value="Architecture & Design">Architecture
+															& Design</form:option>
+														<form:option value="Banking & Financial Services">Banking
+															& Financial Services</form:option>
+														<form:option value="Communications, Advertising, Arts & Media">Communications,
+															Advertising, Arts & Media</form:option>
+														<form:option value="Community Services">Community
+															Services</form:option>
+														<form:option value="Construction">Construction</form:option>
+														<form:option value="Customer Service & Call Centre">Customer
+															Service & Call Centre</form:option>
+														<form:option value="Defence & Protective Services">Defence
+															& Protective Services</form:option>
+														<form:option value="Education & Training">Education &
+															Training</form:option>
+														<form:option value="Engineering">Engineering</form:option>
+														<form:option value="Executive & General Management">Executive
+															& General Management</form:option>
+														<form:option value="Health & Medical">Health & Medical</form:option>
+														<form:option value="Hospitality & Tourism">Hospitality
+															& Tourism</form:option>
+														<form:option value="Human Resources & Recruitment">Human
+															Resources & Recruitment</form:option>
+														<form:option value="IT">Information - Technology</form:option>
+														<form:option value="Insurance & Superannuation">Insurance
+															& Superannuation</form:option>
+														<form:option value="Legal">Legal</form:option>
+														<form:option value="Manufacturing">Manufacturing</form:option>
+														<form:option value="Mining & Energy">Mining & Energy</form:option>
+														<form:option value="Real Estate & Property">Real
+															Estate & Property</form:option>
+														<form:option value="Retail">Retail</form:option>
+														<form:option value="Sales">Sales</form:option>
+														<form:option value="Science">Science</form:option>
+														<form:option value="Sport & Recreation">Sport &
+															Recreation</form:option>
+														<form:option value="Trades & Services">Trades &
+															Services</form:option>
+														<form:option value="Transport & Logistics">Transport &
+															Logistics</form:option>
+
+
+													</form:select>
 												</div>
 											</div>
 											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
 												<div class="select-wrap">
-													<span class="icon-keyboard_arrow_down arrow-down"></span> <select
-														name="" id="" class="form-control">
-														<option value="1">All Locations</option>
-														<option value="2">Ho Chi Minh</option>
-														<option value="3">Da Nang</option>
-														<option value="4">Ha Noi</option>
-														<option value="5">Vung Tau</option>
-													</select>
+													<span class="icon-keyboard_arrow_down arrow-down"></span> <form:select
+														path="location" name="" id="" class="form-control">
+														<form:option value="">All Country</</form:option>
+														<form:option value="Hồ Chí Minh">Hồ Chí Minh</form:option>
+														<form:option value="Hà Nội">Hà Nội</form:option>
+														<form:option value="Đà Nẵng">Đà Nẵng</form:option>
+														<form:option value="Huế">Huế</form:option>
+														<form:option value="Cần Thơ">Cần Thơ</form:option>
+													</form:select>
 												</div>
 											</div>
 											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
@@ -160,7 +206,7 @@
 													value="Search">
 											</div>
 										</div>
-									</form>
+									</form:form>
 								</div>
 								<div class="tab-pane fade" id="pills-candidate" role="tabpanel"
 									aria-labelledby="pills-candidate-tab">
@@ -213,99 +259,100 @@
 							class="h5">+</span> Post a Job</a>
 					</div> -->
 				</div>
-					<c:forEach var="listJobpost" items="${listJobpost}">
-					
-							<div class="row" data-aos="fade">
-								<div class="col-md-12">
+				<c:forEach var="listJobpost" items="${listJobpost}">
 
-									<div
-										class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-										<a href="/Get-JobPost/${listJobpost.id}">
-										<div class="mb-4 mb-md-0 mr-5">
-											<div class="job-post-item-header d-flex align-items-center">
-												<img class="img-responsive" alt="" src="<c:url value="/resources/uploaded-images/${listJobpost.image}"></c:url>">
-												<h2 class="mr-3 text-black h4" style="margin-left: 1em">${listJobpost.jobName}</h2>
+					<div class="row" data-aos="fade">
+						<div class="col-md-12">
 
-											</div>
-											</a>
-											<div class="job-post-item-body d-block d-md-flex">
-												<div class="mr-3">
-													<span class="fl-bigmug-line-portfolio23"></span>
-													${listJobpost.companyName}
-												</div>
-												<div>
-													<span class="fl-bigmug-line-big104"></span>
-													${listJobpost.location}
-												</div>
+							<div
+								class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
+								<a href="/Get-JobPost/${listJobpost.id}">
+									<div class="mb-4 mb-md-0 mr-5">
+										<div class="job-post-item-header d-flex align-items-center">
+											<img class="img-responsive"  alt=""
+												src="<c:url value="/resources/uploaded-images/${listJobpost.image}"></c:url>">
+											<h2 class="mr-3 text-black h4" style="margin-left: 1em">${listJobpost.jobName}</h2>
 
-												<div>
-													&nbsp; <span class="fl-bigmug-line-nine16"></span></a>
-													${listJobpost.date}
-												</div>
-											</div>
 										</div>
-
-										<div class="ml-auto" id="applyJob">
-											<a href="job-single.html" class="btn btn-primary py-2" >Apply
-												Job</a>
-										</div>
+								</a>
+								<div class="job-post-item-body d-block d-md-flex">
+									<div class="mr-3">
+										<span class="fl-bigmug-line-portfolio23"></span>
+										${listJobpost.companyName}
+									</div>
+									<div>
+										<span class="fl-bigmug-line-big104"></span>
+										${listJobpost.location}
 									</div>
 
+									<div>
+										&nbsp; <span class="fl-bigmug-line-nine16"></span></a>
+										${listJobpost.date}
+									</div>
 								</div>
 							</div>
-					</c:forEach>
-				<div class="row mt-5" id="taglib">
-					<div class="col-md-12 text-center">
-						<div id="page-id" class="site-block-27">
-							<tag:paginate max="10" offset="${offset}" count="${count}"
-								uri="${tab}" next="&raquo;" previous="&laquo;" />
+
+							<div class="ml-auto" id="applyJob">
+								<a href="/Get-JobPost/${listJobpost.id}"
+									class="btn btn-primary py-2">Apply Job</a>
+							</div>
 						</div>
+
+					</div>
+			</div>
+			</c:forEach>
+			<div class="row mt-5" id="taglib">
+				<div class="col-md-12 text-center">
+					<div id="page-id" class="site-block-27">
+						<tag:paginate max="10" offset="${offset}" count="${count}"
+							uri="${tab}" next="&raquo;" previous="&laquo;" />
 					</div>
 				</div>
-
-
 			</div>
+
+
 		</div>
-
-		<div class="py-5 bg-primary">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h2 class="text-white h4 font-weihgt-normal mb-4">Subscribe
-							Newsletter</h2>
-					</div>
-				</div>
-				<form action="" class="row">
-					<div class="col-md-9">
-						<input type="text" class="form-control border-0 mb-3 mb-md-0"
-							placeholder="Enter Your Email">
-					</div>
-					<div class="col-md-3">
-						<input type="submit" value="Send" class="btn btn-dark btn-block"
-							style="height: 45px;">
-					</div>
-				</form>
-			</div>
-		</div>
-		<footer class="site-footer">
-			<div class="container">
-
-
-
-				<div class="col-lg-3">
-					<h3 class="footer-heading mb-4">Contact Info</h3>
-					<ul class="list-unstyled">
-						<li><span class="d-block text-white">Address</span> Ton Duc
-							Thang University Nguyen Huu Tho Street, Ho Chi Minh City</li>
-						<li><span class="d-block text-white">Telephone</span>
-							+84386459031</li>
-						<li><span class="d-block text-white">Email</span>
-							phuongnambr1997@gmail.com</li>
-					</ul>
-
-				</div>
-			</div>
 	</div>
+
+	<div class="py-5 bg-primary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2 class="text-white h4 font-weihgt-normal mb-4">Subscribe
+						Newsletter</h2>
+				</div>
+			</div>
+			<form action="" class="row">
+				<div class="col-md-9">
+					<input type="text" class="form-control border-0 mb-3 mb-md-0"
+						placeholder="Enter Your Email">
+				</div>
+				<div class="col-md-3">
+					<input type="submit" value="Send" class="btn btn-dark btn-block"
+						style="height: 45px;">
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer class="site-footer">
+		<div class="container">
+
+
+
+			<div class="col-lg-3">
+				<h3 class="footer-heading mb-4">Contact Info</h3>
+				<ul class="list-unstyled">
+					<li><span class="d-block text-white">Address</span> Ton Duc
+						Thang University Nguyen Huu Tho Street, Ho Chi Minh City</li>
+					<li><span class="d-block text-white">Telephone</span>
+						+84386459031</li>
+					<li><span class="d-block text-white">Email</span>
+						phuongnambr1997@gmail.com</li>
+				</ul>
+
+			</div>
+		</div>
+		</div>
 	</footer>
 	</div>
 
@@ -386,8 +433,6 @@
 				});
 			}
 		}
-			
-		
 	</script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 

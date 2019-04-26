@@ -8,10 +8,12 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jobs.recruitment.model.InfoSearch;
 import com.jobs.recruitment.model.JobPost;
 @Repository
 @Transactional
@@ -68,18 +70,65 @@ public class JobDaoImp implements JobDao {
 		}
 		return null;
 	}
-	@Override
-	public List<JobPost> searchAllJobpostByUserName(String username) {
+	@Override /*dang xu ly*/
+	public List<JobPost> searchAllJobpostByUserName(String userName,Integer offset, Integer maxResult) {
 		Session session = this.sessionFactory.getCurrentSession();
-		List<JobPost> jobPostsList = session.createQuery("from job_posts").list();
-		List<JobPost> jobPostsListByUser=new ArrayList<>();
-		for(JobPost jobPost:jobPostsList) 
+		String hql="SELECT j FROM com.jobs.recruitment.model.JobPost j where j.userName=:username";
+		Query query = session.createQuery(hql);
+		query.setParameter("username",userName);
+		List results=query.setFirstResult(offset != null ? offset : 0)
+				.setMaxResults(maxResult != null ? maxResult : 10).list();
+		return results;
+	}
+	@SuppressWarnings("unchecked") /*dang xu ly*/
+	@Override
+	public int count(String userName) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String hql="SELECT COUNT(*) FROM com.jobs.recruitment.model.JobPost j where j.userName=:username";
+		Query query = session.createQuery(hql);
+		query.setParameter("username",userName);
+		int count = ((Long)query.uniqueResult()).intValue();
+		return count;
+	}
+	@Override
+	public List<JobPost> searchAllJobpostByType(InfoSearch inforSeach) {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<JobPost> jobPostsList =session.createQuery("from job_posts").list();
+		List<JobPost> jobPostsListByType=new ArrayList<>();
+		for(JobPost jobPost:jobPostsList)
 		{
-			if(jobPost.getUserName().equals(username)) 
-			{
-				jobPostsListByUser.add(jobPost);
+			if(inforSeach.getNameJob().equals("")) {
+				if(inforSeach.getTypeJob().equals("") && inforSeach.getLocation().equals("")) {
+					return jobPostsList;
+				}
+				else if(inforSeach.getTypeJob().equals("") && inforSeach.getLocation().equals(jobPost.getLocation())) {
+					jobPostsListByType.add(jobPost);
+				}
+				else if(inforSeach.getTypeJob().equals(jobPost.getCareer()) && inforSeach.getLocation().equals("")){
+					jobPostsListByType.add(jobPost);
+
+				}
+				else if(inforSeach.getTypeJob().equals(jobPost.getCareer()) && inforSeach.getLocation().equals(jobPost.getLocation())) {
+					jobPostsListByType.add(jobPost);
+				}
+			}
+			else {
+				if(inforSeach.getNameJob().equals(jobPost.getJobName())&&inforSeach.getTypeJob().equals("") && inforSeach.getLocation().equals("")) {
+					jobPostsListByType.add(jobPost);
+				}
+				else if(inforSeach.getNameJob().equals(jobPost.getJobName())&&inforSeach.getTypeJob().equals("") && inforSeach.getLocation().equals(jobPost.getLocation())) {
+					jobPostsListByType.add(jobPost);
+				}
+				else if(inforSeach.getNameJob().equals(jobPost.getJobName())&&inforSeach.getTypeJob().equals(jobPost.getCareer()) && inforSeach.getLocation().equals("")){
+					jobPostsListByType.add(jobPost);
+
+				}
+				else if(inforSeach.getNameJob().equals(jobPost.getJobName())&&inforSeach.getTypeJob().equals(jobPost.getCareer())&& inforSeach.getLocation().equals(jobPost.getLocation())) {
+					jobPostsListByType.add(jobPost);
+				}
 			}
 		}
-		return jobPostsListByUser;
+		return jobPostsListByType;
 	}
+	
 }

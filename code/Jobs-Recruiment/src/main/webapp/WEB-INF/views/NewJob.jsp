@@ -137,6 +137,62 @@
 						<div class="row form-group">
 							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
 								<div style="width: 75%; margin: auto;">
+									<label class="font-weight-bold" for="location">Career</label>
+									<form:select path="career" name="career" id="career"
+										class="form-control">
+										<form:option value="Accounting">Accounting</form:option>
+														<form:option value="Administration & Office Support">Administration
+															& Office Support</form:option>
+														<form:option value="Agriculture, Animals & Conservation">Agriculture,
+															Animals & Conservation</form:option>
+														<form:option value="Architecture & Design">Architecture
+															& Design</form:option>
+														<form:option value="Banking & Financial Services">Banking
+															& Financial Services</form:option>
+														<form:option value="Communications, Advertising, Arts & Media">Communications,
+															Advertising, Arts & Media</form:option>
+														<form:option value="Community Services">Community
+															Services</form:option>
+														<form:option value="Construction">Construction</form:option>
+														<form:option value="Customer Service & Call Centre">Customer
+															Service & Call Centre</form:option>
+														<form:option value="Defence & Protective Services">Defence
+															& Protective Services</form:option>
+														<form:option value="Education & Training">Education &
+															Training</form:option>
+														<form:option value="Engineering">Engineering</form:option>
+														<form:option value="Executive & General Management">Executive
+															& General Management</form:option>
+														<form:option value="Health & Medical">Health & Medical</form:option>
+														<form:option value="Hospitality & Tourism">Hospitality
+															& Tourism</form:option>
+														<form:option value="Human Resources & Recruitment">Human
+															Resources & Recruitment</form:option>
+														<form:option value="IT">Information - Technology</form:option>
+														<form:option value="Insurance & Superannuation">Insurance
+															& Superannuation</form:option>
+														<form:option value="Legal">Legal</form:option>
+														<form:option value="Manufacturing">Manufacturing</form:option>
+														<form:option value="Mining & Energy">Mining & Energy</form:option>
+														<form:option value="Real Estate & Property">Real
+															Estate & Property</form:option>
+														<form:option value="Retail">Retail</form:option>
+														<form:option value="Sales">Sales</form:option>
+														<form:option value="Science">Science</form:option>
+														<form:option value="Sport & Recreation">Sport &
+															Recreation</form:option>
+														<form:option value="Trades & Services">Trades &
+															Services</form:option>
+														<form:option value="Transport & Logistics">Transport &
+															Logistics</form:option>
+
+									</form:select>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group">
+							<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
+								<div style="width: 75%; margin: auto;">
 									<label class="font-weight-bold" for="jobname">Job Name</label>
 									<form:input path="jobName" type="text" id="jobname"
 										class="form-control" required="required"
@@ -311,27 +367,11 @@
 							</div>
 						</div>
 				</div>
-				<div class="row form-group">
-					<div class="col-md-12 mb-3 mb-md-0 style="text-align:center;>
-						<div style="width: 75%; margin: auto;">
-							<label class="font-weight-bold" for="jobname">Upload
-								Avatar</label>
-							<form:errors path="file" style="color:red;" />
-						</div>
-					</div>
-				</div>
 				</form:form>
 			</div>
 		</div>
 	</div>
 	</div>
-
-
-
-
-
-
-
 	<footer class="site-footer">
 	<div class="container">
 

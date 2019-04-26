@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jobs.recruitment.dao.JobDao;
+import com.jobs.recruitment.model.InfoSearch;
 import com.jobs.recruitment.model.JobPost;
 
 @Service
@@ -41,9 +42,20 @@ public class JobServiceImp implements JobService {
 	}
 
 	@Override
-	public List<JobPost> searchAllJobpostByUserName(String username) {
+	public List<JobPost> searchAllJobpostByUserName(String username,Integer offset, Integer maxResult) {
+		return jobDao.searchAllJobpostByUserName(username,offset,maxResult);
+	}
+
+	@Override
+	public List<JobPost> searchAllJobpostByType(InfoSearch inforSeach) {
 		// TODO Auto-generated method stub
-		return jobDao.searchAllJobpostByUserName(username);
+		return this.jobDao.searchAllJobpostByType(inforSeach);
+	}
+
+	@Override
+	public int count(String username) {
+		// TODO Auto-generated method stub
+		return this.jobDao.count(username);
 	}
 
 }

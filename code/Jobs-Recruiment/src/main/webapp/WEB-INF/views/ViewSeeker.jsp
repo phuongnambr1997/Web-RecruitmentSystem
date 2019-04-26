@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tag" uri="/WEB-INF/taglibs/customTaglib.tld"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +72,7 @@
 						<nav class="site-navigation text-right" role="navigation">
 
 							<ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-								<li class="active"><a href="/ViewSeeker/${passCodeUser}">Home</a></li>
+								<li class="active"><a href="#">Home</a></li>
 								<li class="has-children"><a href="category.html">Category</a>
 									<ul class="dropdown">
 										<li><a href="#">Full Time</a></li>
@@ -84,7 +85,7 @@
 								<li><a href="contact.html">Contact</a></li>
 								<li class="has-children"><a href="/showProfile/${passCodeUser}">${username}</a>
 									<ul class="dropdown">
-										<li><a href="/ViewSeekerHis/${passCodeUser}">History Apply</a></li>
+										<li><a href="/ViewSeekerHis/${passCodeUser}">Apply History</a></li>
 									</ul></li>
 								<li><a href="/Home" id='signUp'> Sign Out</a></li>
 							</ul>
@@ -105,8 +106,159 @@
 			</div>
 
 		</header>
+		<div class="site-blocks-cover"
+			style="background-image: url(/resources/images/hero_1.jpg);"
+			data-aos="fade" data-stellar-background-ratio="0.5">
+			<div class="container">
+				<div class="row row-custom align-items-center">
+					<div class="col-md-10">
+						<h1 class="mb-2 text-black w-75">
+							<span class="font-weight-bold">Find </span>Your Job on Website
+						</h1>
+						<div class="job-search">
+							<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+								<li class="nav-item"><a class="nav-link active py-3"
+									id="pills-job-tab" data-toggle="pill" href="#pills-job"
+									role="tab" aria-controls="pills-job" aria-selected="true">Find
+										A Job</a></li>
+							</ul>
+							<div class="tab-content bg-white p-4 rounded"
+								id="pills-tabContent">
+								<div class="tab-pane fade show active" id="pills-job"
+									role="tabpanel" aria-labelledby="pills-job-tab">
+									
+									<form:form action="/Search/${passCodeUser}" method="post" modelAttribute="inforSearch">
+										<div class="row">
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+											<form:input path="nameJob" type="text" class="form-control"
+													placeholder="eg. Web Developer"/>
+											</div>
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<div class="select-wrap">
+													<span class="icon-keyboard_arrow_down arrow-down"></span> 
+													<form:select path="typeJob" name="typeJob" id="typeJob" class="form-control">
+														<form:option value="">All Jobs</</form:option>
+														<form:option value="Accounting">Accounting</form:option>
+														<form:option value="Administration & Office Support">Administration
+															& Office Support</form:option>
+														<form:option value="Agriculture, Animals & Conservation">Agriculture,
+															Animals & Conservation</form:option>
+														<form:option value="Architecture & Design">Architecture
+															& Design</form:option>
+														<form:option value="Banking & Financial Services">Banking
+															& Financial Services</form:option>
+														<form:option value="Communications, Advertising, Arts & Media">Communications,
+															Advertising, Arts & Media</form:option>
+														<form:option value="Community Services">Community
+															Services</form:option>
+														<form:option value="Construction">Construction</form:option>
+														<form:option value="Customer Service & Call Centre">Customer
+															Service & Call Centre</form:option>
+														<form:option value="Defence & Protective Services">Defence
+															& Protective Services</form:option>
+														<form:option value="Education & Training">Education &
+															Training</form:option>
+														<form:option value="Engineering">Engineering</form:option>
+														<form:option value="Executive & General Management">Executive
+															& General Management</form:option>
+														<form:option value="Health & Medical">Health & Medical</form:option>
+														<form:option value="Hospitality & Tourism">Hospitality
+															& Tourism</form:option>
+														<form:option value="Human Resources & Recruitment">Human
+															Resources & Recruitment</form:option>
+														<form:option value="IT">Information - Technology</form:option>
+														<form:option value="Insurance & Superannuation">Insurance
+															& Superannuation</form:option>
+														<form:option value="Legal">Legal</form:option>
+														<form:option value="Manufacturing">Manufacturing</form:option>
+														<form:option value="Mining & Energy">Mining & Energy</form:option>
+														<form:option value="Real Estate & Property">Real
+															Estate & Property</form:option>
+														<form:option value="Retail">Retail</form:option>
+														<form:option value="Sales">Sales</form:option>
+														<form:option value="Science">Science</form:option>
+														<form:option value="Sport & Recreation">Sport &
+															Recreation</form:option>
+														<form:option value="Trades & Services">Trades &
+															Services</form:option>
+														<form:option value="Transport & Logistics">Transport &
+															Logistics</form:option>
+
+
+													</form:select>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<div class="select-wrap">
+													<span class="icon-keyboard_arrow_down arrow-down"></span> <form:select
+														path="location" name="" id="" class="form-control">
+														<form:option value="">All Country</</form:option>
+														<form:option value="Hồ Chí Minh">Hồ Chí Minh</form:option>
+														<form:option value="Hà Nội">Hà Nội</form:option>
+														<form:option value="Đà Nẵng">Đà Nẵng</form:option>
+														<form:option value="Huế">Huế</form:option>
+														<form:option value="Cần Thơ">Cần Thơ</form:option>
+													</form:select>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<input type="submit" class="btn btn-primary btn-block"
+													value="Search">
+											</div>
+										</div>
+									</form:form>
+								</div>
+								<div class="tab-pane fade" id="pills-candidate" role="tabpanel"
+									aria-labelledby="pills-candidate-tab">
+									<form action="#" method="post">
+										<div class="row">
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<input type="text" class="form-control"
+													placeholder="eg. Carl Smith">
+											</div>
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<div class="select-wrap">
+													<span class="icon-keyboard_arrow_down arrow-down"></span> <select
+														name="" id="" class="form-control">
+														<option value="">Category</option>
+														<option value="fulltime">Full Time</option>
+														<option value="fulltime">Part Time</option>
+														<option value="freelance">Freelance</option>
+														<option value="internship">Internship</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<input type="text"
+													class="form-control form-control-block search-input"
+													id="autocomplete" placeholder="Location"
+													onFocus="geolocate()">
+											</div>
+											<div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+												<input type="submit" class="btn btn-primary btn-block"
+													value="Search">
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="site-section bg-light">
 			<div class="container">
+				<div class="row justify-content-start text-left mb-5">
+					<div class="col-md-9" data-aos="fade">
+						<h2 class="font-weight-bold text-black">Recent Jobs</h2>
+					</div>
+					<!-- <div class="col-md-3" data-aos="fade" data-aos-delay="200">
+						<a href="#" class="btn btn-primary py-3 btn-block"><span
+							class="h5">+</span> Post a Job</a>
+					</div> -->
+				</div>
 				<c:forEach var="listJobpost" items="${listJobpost}">
 
 					<div class="row" data-aos="fade">
@@ -114,7 +266,7 @@
 
 							<div
 								class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-								<a href="/Get-JobPost-Recruiter/${listJobpost.id}">
+								<a href="/Get-JobPost/${listJobpost.id}">
 									<div class="mb-4 mb-md-0 mr-5">
 										<div class="job-post-item-header d-flex align-items-center">
 											<img class="img-responsive"  alt=""
@@ -140,23 +292,23 @@
 								</div>
 							</div>
 
-							<!-- <div class="ml-auto" id="applyJob">
-											<a href="job-single.html" class="btn btn-primary py-2" >Apply
-												Job</a>
-										</div> -->
+							<div class="ml-auto" id="applyJob">
+								<a href="/Get-JobPost/${listJobpost.id}"
+									class="btn btn-primary py-2">Apply Job</a>
+							</div>
 						</div>
 
 					</div>
 			</div>
 			</c:forEach>
-			 <div class="row mt-5" id="taglib">
-					<div class="col-md-12 text-center">
-						<div id="page-id" class="site-block-27">
-							<tag:paginate max="10" offset="${offset}" count="${count}"
-								uri="${tab}" next="&raquo;" previous="&laquo;" />
-						</div>
+			<div class="row mt-5" id="taglib">
+				<div class="col-md-12 text-center">
+					<div id="page-id" class="site-block-27">
+						<tag:paginate max="10" offset="${offset}" count="${count}"
+							uri="${tab}" next="&raquo;" previous="&laquo;" />
 					</div>
-				</div> 
+				</div>
+			</div>
 
 
 		</div>
@@ -280,7 +432,7 @@
 					autocomplete.setBounds(circle.getBounds());
 				});
 			}
-		}}
+		}
 	</script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 

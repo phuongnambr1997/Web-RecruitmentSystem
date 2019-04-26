@@ -139,7 +139,7 @@
 								<td data-title="ID" style="text-align: center">${feedBack[0]}</td>
 								<td data-title="Job Name" style="text-align: center">${feedBack[1]}</td>
 								<td data-title="Job Company" style="text-align: center">${feedBack[2]}</td>
-								<td data-title="Feedback" style="text-align: center">${feedBack[3]}</td>
+								<td class="feedBack" data-title="Feedback" style="text-align: center">${feedBack[3]}</td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -251,6 +251,18 @@
 						}
 					});
 		});
+		
+		var feedback=document.getElementsByClassName("feedBack");
+		for (i = 0; i < feedback.length; i++) {
+			var x=feedback[i].value;
+			if( x=="Wait For FeedBack!"){
+				feedback[i].style.color = "red";
+			}
+			else {
+				feedback[i].style.color = "green";
+			}
+			}
+		
 	</script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 

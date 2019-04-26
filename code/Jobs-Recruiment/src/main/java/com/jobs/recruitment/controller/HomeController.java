@@ -233,6 +233,19 @@ public class HomeController {
 		model.addAttribute("listJobpost", listJobpost);
 		return "Home";
 	}
+	/*---Search Job---*/
+	@RequestMapping(value = "/Search/{passCodeUser}", method = RequestMethod.POST)
+	public String searchJobInViewSeeker(@PathVariable String passCodeUser,@Validated @ModelAttribute("inforSearch") InfoSearch infoSearch, Model model) {
+		String[] temp = passCodeUser.split("-");
+		String userName = temp[0];
+		int passCode = Integer.parseInt(temp[1]);
+		List<JobPost> listJobpost = this.jobService.searchAllJobpostByType(infoSearch);
+		System.out.println(listJobpost.size());
+		model.addAttribute("listJobpost", listJobpost);
+		model.addAttribute("username", userName);
+		model.addAttribute("passCodeUser", userName + "-" + passCode+"-2");
+		return "ViewSeeker";
+	}
 
 	/* APPLY JOB */
 	@RequestMapping(value = "/ApplyJob", method = RequestMethod.POST)

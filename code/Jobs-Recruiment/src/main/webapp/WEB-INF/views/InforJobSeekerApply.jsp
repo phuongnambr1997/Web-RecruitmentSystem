@@ -138,7 +138,7 @@
 								<tr>
 									<td>${listJobSeekerHisNew.id}</td>
 									<td>${listJobSeekerHisNew.email}</td>
-									<td><a href="#" target="_blank">Download</a></td>
+									<td><a href="/download/${listJobSeekerHisNew.email}/${listJobSeekerHisNew.postId}" target="_blank">Download</a></td>
 									<td><a href="/sendNofiToJobSeeker/${userName}-${listJobSeekerHisNew.id}" class="btn btn-info" role="button">Done</a>
 									</td>
 								</tr>

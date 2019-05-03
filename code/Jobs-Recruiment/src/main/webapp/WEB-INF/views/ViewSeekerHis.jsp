@@ -254,8 +254,8 @@
 		
 		var feedback=document.getElementsByClassName("feedBack");
 		for (i = 0; i < feedback.length; i++) {
-			var x=feedback[i].value;
-			if( x=="Wait For FeedBack!"){
+			var x=feedback[i].innerHTML;
+			if( x==="Wait For FeedBack!"){
 				feedback[i].style.color = "red";
 			}
 			else {

@@ -110,7 +110,7 @@
 			<div class="container">
 				<div class="col-md-12 col-lg-12 mb-5">
 
-					<form:form action="/SaveJob" class="p-5 bg-white" method="POST"
+					<form:form action="/SaveJob/${passCodeUser}" class="p-5 bg-white" method="POST"
 						enctype="multipart/form-data" modelAttribute="fileUploadModel">
 						<h2>It’s our pleasure to support you recruiting your next
 							awesome teammate.</h2>

@@ -2,12 +2,17 @@ package com.jobs.recruitment.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +56,8 @@ public class HomeController {
 	private JobService jobService;
 	@Autowired
 	private ActivityService activityService;
+	@Autowired
+	ServletContext context;
 	// @Autowired
 	// CustomFileValidator customFileValidator;
 
@@ -162,16 +169,19 @@ public class HomeController {
 	}
 
 	/* SHOW NEW JOB FORM */
-	@RequestMapping(value = "/NewJob/{username}", method = RequestMethod.GET)
-	public String newJob(Model model, @PathVariable String username) {
+	@RequestMapping(value = "/NewJob/{passCodeUser}", method = RequestMethod.GET)
+	public String newJob(Model model, @PathVariable String passCodeUser) {
+		String[] temp = passCodeUser.split("-");
+		String userName = temp[0];
 		model.addAttribute("fileUploadModel", new JobPost());
-		model.addAttribute("userName", username);
+		model.addAttribute("userName", userName);
+		model.addAttribute("passCodeUser", passCodeUser);
 		return "NewJob";
 
 	}
 	/* SAVE NEW JOB */
-	@RequestMapping(value = "/SaveJob", method = RequestMethod.POST)
-	public String saveJob(Model model, @ModelAttribute JobPost jobPost, BindingResult bindingResult, Integer offset,
+	@RequestMapping(value = "/SaveJob/{passCodeUser}", method = RequestMethod.POST)
+	public String saveJob(@PathVariable String passCodeUser,Model model, @ModelAttribute JobPost jobPost, BindingResult bindingResult, Integer offset,
 			Integer maxResults) {
 		MultipartFile file = jobPost.getFile();
 		System.out.println(file);
@@ -205,7 +215,7 @@ public class HomeController {
 			}
 
 		}
-		return "Recruiter";
+		return "redirect:/ShowViewRecruiter/"+passCodeUser;
 	}
 
 	/*---GET JOB POST BY ID---------*/
@@ -337,6 +347,37 @@ public class HomeController {
 			}
 		}
 		return "redirect:/";
+	}
+	/*DOWNLOAD CV*/
+	@RequestMapping(value="download/{email}/{postId}")
+	public void download(@PathVariable String email,@PathVariable String postId,HttpServletRequest request, HttpServletResponse response) {
+//		String[] temp = passCode.split("/");
+//		String email=temp[0];
+//		String postId=temp[1];
+		String fileName=email+"_"+postId+".pdf";
+		System.out.println(fileName);
+		 try {
+	            // getting the path to file 
+				String dir = context.getRealPath("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-cv/");
+	            Path file = Paths.get(dir, fileName);
+	            if(!Files.exists(file)){
+	                String errorMessage = "File you are trying to download does not exist on the server.";            
+	                OutputStream outputStream = response.getOutputStream();
+	                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+	                outputStream.close();
+	            }
+	            String mimeType= context.getMimeType(
+	              file.getFileName().toString());
+	            if(mimeType == null){
+	                mimeType = "application/octet-stream";
+	            }
+	            response.setContentType(mimeType);
+	            response.addHeader("Content-Disposition", "attachment; filename="+fileName);        
+	            Files.copy(file, response.getOutputStream());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+
 	}
 
 	/* Test */

@@ -82,7 +82,7 @@
 								<li><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
 								<li><a href="contact.html">Contact</a></li>
-								<li><a href="/NewJob/${username}" id="newJob"><span
+								<li><a href="/NewJob/${passCodeUser}" id="newJob"><span
 										class="rounded bg-primary py-2 px-3 text-white"><span
 											class="h5 mr-2">+</span> Post a Job</span></a></li>
 								<li class="has-children"><a href="/showProfile/${passCodeUser}">${username}</a>

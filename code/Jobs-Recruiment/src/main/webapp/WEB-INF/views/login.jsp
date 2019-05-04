@@ -86,7 +86,7 @@
 							
 						</div>
 						<div >
-							<a href="#" class="txt1" >
+							<a href="/" class="txt1" >
 								 Back to Home 
 							</a>
 						</div>

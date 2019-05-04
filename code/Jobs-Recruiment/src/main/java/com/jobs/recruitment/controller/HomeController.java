@@ -1,19 +1,19 @@
 package com.jobs.recruitment.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,12 +120,14 @@ public class HomeController {
 		String userName = temp[0];
 		int passCode = Integer.parseInt(temp[1]);
 		List<JobPost> listJobpost = jobService.searchAllJobpostByUserName(userName, offset, maxResults);
+		List<JobSeekerHis> listJobSeekerHisNew = activityService.searchAllCV(offset, maxResults, userName, 0);
 		model.addAttribute("username", userName);
 		model.addAttribute("roleId", 1);
 		model.addAttribute("listJobpost", listJobpost);
 		model.addAttribute("count", this.jobService.count(userName));
 		model.addAttribute("offset", offset);
 		model.addAttribute("passCodeUser", userName + "-" + passCode+"-1");
+		model.addAttribute("totalSeeker", listJobSeekerHisNew.size());
 		return "Recruiter";
 	}
 	/*SHOW VIEW SEEKER*/
@@ -140,7 +142,7 @@ public class HomeController {
 		model.addAttribute("listJobpost", listJobpost);
 		model.addAttribute("inforSearch", new InfoSearch());
 		model.addAttribute("username", userName);
-		model.addAttribute("passCodeUser", userName + "-" + passCode+"-2");
+		model.addAttribute("passCodeUser", passCodeUser);
 		return "ViewSeeker";
 	}
 
@@ -154,7 +156,7 @@ public class HomeController {
 		model.addAttribute("username", userName);
 		model.addAttribute("roleId", 2);
 		model.addAttribute("getListFeedBack", listFeedBack);
-		model.addAttribute("passCodeUser", userName + "-" + passCode+"-2");
+		model.addAttribute("passCodeUser", passCodeUser);
 		return "ViewSeekerHis";
 	}
 	/* Registration */
@@ -228,10 +230,11 @@ public class HomeController {
 	}
 
 	/*---GET JOB POST BY ID IN VIEW RECRUITER---------*/
-	@RequestMapping(value = "/Get-JobPost-Recruiter/{id}")
-	public String getJobpost(@PathVariable Long id, Model model) {
+	@RequestMapping(value = "/Get-JobPost-Recruiter/{id}/{passCodeUser}")
+	public String getJobpost(@PathVariable Long id,@PathVariable String passCodeUser, Model model) {
 		JobPost jobPost = this.jobService.getJobPost(id);
 		model.addAttribute("jobPost", jobPost);
+		model.addAttribute("passCodeUser", passCodeUser);
 		return "JobSingleRecruiter";
 	}
 
@@ -311,12 +314,12 @@ public class HomeController {
 	/* SEND NOTIFICATION TO JOB_SEEKER */
 	@RequestMapping(value = "/sendNofiToJobSeeker/{passCode}")
 	public String sendNofiToJobSeeker(@PathVariable String passCode) {
-		String[] temp = passCode.split("-");
+		String[] temp = passCode.split("_");
+		String passCodeUser=temp[0];
 		Long id = Long.parseLong(temp[1]);
-		String user = temp[0];
 		JobSeekerHis jobSeekerHis = this.activityService.getJobSeeker(id);
 		if (this.activityService.updateJobSeeker(jobSeekerHis) == true) {
-			return "redirect:/getListCv/" + user;
+			return "redirect:/getListCv/" + passCodeUser;
 		}
 		return null;
 	}
@@ -326,10 +329,12 @@ public class HomeController {
 	public String showProfile(@PathVariable String passCodeUser, Model model) {
 		String[] temp = passCodeUser.split("-");
 		String userName = temp[0];
+		String role=temp[2];
 		InforUser inforUser = this.userService.getInforUser(userName);
 		System.out.println(inforUser.getUserName());
 		model.addAttribute("inforUser", inforUser);
 		model.addAttribute("passCodeUser", passCodeUser);
+		model.addAttribute("roleId", role);
 		return "Profile";
 	}
 
@@ -350,35 +355,52 @@ public class HomeController {
 	}
 	/*DOWNLOAD CV*/
 	@RequestMapping(value="download/{email}/{postId}")
-	public void download(@PathVariable String email,@PathVariable String postId,HttpServletRequest request, HttpServletResponse response) {
-//		String[] temp = passCode.split("/");
-//		String email=temp[0];
-//		String postId=temp[1];
-		String fileName=email+"_"+postId+".pdf";
-		System.out.println(fileName);
-		 try {
-	            // getting the path to file 
-				String dir = context.getRealPath("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-cv/");
-	            Path file = Paths.get(dir, fileName);
-	            if(!Files.exists(file)){
-	                String errorMessage = "File you are trying to download does not exist on the server.";            
-	                OutputStream outputStream = response.getOutputStream();
-	                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
-	                outputStream.close();
-	            }
-	            String mimeType= context.getMimeType(
-	              file.getFileName().toString());
-	            if(mimeType == null){
-	                mimeType = "application/octet-stream";
-	            }
-	            response.setContentType(mimeType);
-	            response.addHeader("Content-Disposition", "attachment; filename="+fileName);        
-	            Files.copy(file, response.getOutputStream());
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
+	public void getLogFile(@PathVariable String email,@PathVariable String postId,HttpSession session,HttpServletResponse response) throws Exception {
+	    try {
+	    	String fileName=email+"_"+postId;
+	        String filePathToBeServed = "/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-cv/"+fileName+".pdf";
+	        File fileToDownload = new File(filePathToBeServed);
+	        InputStream inputStream = new FileInputStream(fileToDownload);
+	        response.setContentType("application/force-download");
+	        response.setHeader("Content-Disposition", "attachment; filename="+fileName+".pdf"); 
+	        IOUtils.copy(inputStream, response.getOutputStream());
+	        response.flushBuffer();
+	        inputStream.close();
+	    } catch (Exception e){
+	        LOGGER.debug("Request could not be completed at this moment. Please try again.");
+	        e.printStackTrace();
+	    }
 
 	}
+//	public void download(@PathVariable String email,@PathVariable String postId,HttpServletRequest request, HttpServletResponse response) {
+////		String[] temp = passCode.split("/");
+////		String email=temp[0];
+////		String postId=temp[1];
+//		String fileName=email+"_"+postId;
+//		System.out.println(fileName);
+//		 try {
+//	            // getting the path to file 
+//				String dir = context.getRealPath("/Users/TuanTran/Desktop/ASSIGNMENT/Web/backend/code/Jobs-Recruiment/src/main/webapp/resources/theme/uploaded-cv/");
+//	            Path file = Paths.get(dir, fileName);
+//	            if(!Files.exists(file)){
+//	                String errorMessage = "File you are trying to download does not exist on the server.";            
+//	                OutputStream outputStream = response.getOutputStream();
+//	                outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+//	                outputStream.close();
+//	            }
+//	            String mimeType= context.getMimeType(
+//	              file.getFileName().toString());
+//	            if(mimeType == null){
+//	                mimeType = "application/octet-stream";
+//	            }
+//	            response.setContentType(mimeType);
+//	            response.addHeader("Content-Disposition", "attachment; filename="+fileName);        
+//	            Files.copy(file, response.getOutputStream());
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+//
+//	}
 
 	/* Test */
 	@RequestMapping(value = "/test")

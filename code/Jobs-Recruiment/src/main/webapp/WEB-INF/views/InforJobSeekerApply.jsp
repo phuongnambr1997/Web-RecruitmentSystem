@@ -64,7 +64,7 @@
 
 					<div class="col-6 col-xl-2">
 						<h1 class="mb-0">
-							<a href="index.html" class="text-black h2 mb-0">Job<strong>Search</strong></a>
+							<a href="/ShowViewRecruiter/${passCodeUser}" class="text-black h2 mb-0">Job<strong>Search</strong></a>
 						</h1>
 					</div>
 
@@ -139,7 +139,7 @@
 									<td>${listJobSeekerHisNew.id}</td>
 									<td>${listJobSeekerHisNew.email}</td>
 									<td><a href="/download/${listJobSeekerHisNew.email}/${listJobSeekerHisNew.postId}" target="_blank">Download</a></td>
-									<td><a href="/sendNofiToJobSeeker/${userName}-${listJobSeekerHisNew.id}" class="btn btn-info" role="button">Done</a>
+									<td><a href="/sendNofiToJobSeeker/${passCodeUser}_${listJobSeekerHisNew.id}" class="btn btn-info" role="button">Done</a>
 									</td>
 								</tr>
 							</tbody>

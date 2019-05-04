@@ -64,7 +64,7 @@
 
 					<div class="col-6 col-xl-2">
 						<h1 class="mb-0">
-							<a href="#" class="text-black h2 mb-0">Job<strong>Search</strong></a>
+							<a href="/ViewSeeker/${passCodeUser}" class="text-black h2 mb-0">Job<strong>Search</strong></a>
 						</h1>
 					</div>
 
@@ -72,7 +72,7 @@
 						<nav class="site-navigation text-right" role="navigation">
 
 							<ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-								<li class="active"><a href="#">Home</a></li>
+								<li class="active"><a href="/ViewSeeker/${passCodeUser}">Home</a></li>
 								<li class="has-children"><a href="category.html">Category</a>
 									<ul class="dropdown">
 										<li><a href="#">Full Time</a></li>

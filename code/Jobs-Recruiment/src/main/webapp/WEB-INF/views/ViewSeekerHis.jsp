@@ -65,7 +65,7 @@
 
 				<div class="col-6 col-xl-2">
 					<h1 class="mb-0">
-						<a href="index.html" class="text-black h2 mb-0">Job<strong>Search</strong></a>
+						<a href="/ViewSeeker/${passCodeUser}" class="text-black h2 mb-0">Job<strong>Search</strong></a>
 					</h1>
 				</div>
 
@@ -85,7 +85,7 @@
 						<li><a href="blog.html">Blog</a></li>
 						<li><a href="about.html">About</a></li>
 						<li><a href="contact.html">Contact</a></li>
-						<li><a href="/Home" id='signUp'> Sign Out</a></li>
+						<li><a href="/" id='signUp'> Sign Out</a></li>
 					</ul>
 					</nav>
 				</div>

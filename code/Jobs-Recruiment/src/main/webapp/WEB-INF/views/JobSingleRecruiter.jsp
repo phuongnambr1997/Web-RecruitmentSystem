@@ -65,7 +65,7 @@
 
 					<div class="col-6 col-xl-2">
 						<h1 class="mb-0">
-							<a href="index.html" class="text-black h2 mb-0">Job<strong>start</strong></a>
+							<a href="/ShowViewRecruiter/${passCodeUser}" class="text-black h2 mb-0">Job<strong>start</strong></a>
 						</h1>
 					</div>
 
@@ -73,7 +73,7 @@
 						<nav class="site-navigation text-right" role="navigation">
 
 							<ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
-								<li><a href="index.html">Home</a></li>
+								<li><a href="/ShowViewRecruiter/${passCodeUser}">Home</a></li>
 								<li class="has-children"><a href="category.html">Category</a>
 									<ul class="dropdown">
 										<li><a href="#">Full Time</a></li>
@@ -112,7 +112,7 @@
 			<div class="container text-center">
 
 				<p class="mb-0 unit-6">
-					<a href="index.html">Home</a> <span class="sep">></span> <span>Job
+					<a href="/ShowViewRecruiter/${passCodeUser}">Home</a> <span class="sep">></span> <span>Job
 						Item</span>
 				</p>
 			</div>

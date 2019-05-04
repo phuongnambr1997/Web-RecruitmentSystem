@@ -21,6 +21,8 @@
 	href="<c:url value="/resources/css/magnific-popup.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/jquery-ui.css"/>">
+	<link rel="stylesheet"
+	href="<c:url value="/resources/css/notifi.css"/>">
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/owl.carousel.min.css"/>">
 <link rel="stylesheet"
@@ -87,7 +89,11 @@
 											class="h5 mr-2">+</span> Post a Job</span></a></li>
 								<li class="has-children"><a href="/showProfile/${passCodeUser}">${username}</a>
 									<ul class="dropdown">
-										<li><a href="/getListCv/${passCodeUser}">JobSeeker Apply</a></li>
+										<li><a class="notification" href="/getListCv/${passCodeUser}">JobSeeker Apply
+										 <span class="badge" id="totalSeeker" value="${totalSeeker}">${totalSeeker}</span>
+										</a>
+											</li>
+										</li>
 									</ul></li>
 								<li><a href="/Home" id='signUp'> Sign Out</a></li>
 							</ul>
@@ -117,7 +123,7 @@
 
 							<div
 								class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-								<a href="/Get-JobPost-Recruiter/${listJobpost.id}">
+								<a href="/Get-JobPost-Recruiter/${listJobpost.id}/${passCodeUser}">
 									<div class="mb-4 mb-md-0 mr-5">
 										<div class="job-post-item-header d-flex align-items-center">
 											<img class="img-responsive"  alt=""
@@ -142,11 +148,6 @@
 									</div>
 								</div>
 							</div>
-
-							<!-- <div class="ml-auto" id="applyJob">
-											<a href="job-single.html" class="btn btn-primary py-2" >Apply
-												Job</a>
-										</div> -->
 						</div>
 
 					</div>
@@ -185,6 +186,12 @@
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+	var x=document.getElementById("totalSeeker");
+	if(x.innerHTML==="0"){
+		x.style.display = 'none';
+	}
+	</script>
 	<footer class="site-footer">
 		<div class="container">
 
@@ -284,6 +291,8 @@
 				});
 			}
 		}}
+		
+		
 	</script>
 	<script src="<c:url value="/resources/js/main.js"/>"></script>
 
